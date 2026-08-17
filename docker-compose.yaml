@@ -3,6 +3,11 @@ services:
     image: mysql:8.4
     container_name: pterodactyl-mysql
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     environment:
       TZ: "Asia/Tokyo"
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
@@ -22,6 +27,11 @@ services:
   redis:
     image: redis:alpine
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     volumes:
       - ./redis:/data
 
@@ -29,6 +39,11 @@ services:
     image: ghcr.io/pterodactyl/panel:latest
     container_name: pterodactyl-panel
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     environment:
       TZ: "Asia/Tokyo"
       APP_TIMEZONE: "Asia/Tokyo"
@@ -55,6 +70,11 @@ services:
     image: ghcr.io/pterodactyl/panel:latest
     container_name: pterodactyl-queue
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     environment:
       TZ: "Asia/Tokyo"
       APP_TIMEZONE: "Asia/Tokyo"
@@ -88,6 +108,11 @@ services:
 
   phpmyadmin:
     image: phpmyadmin
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     ports:
       - "127.0.0.1:8081:80"
     environment:
@@ -109,6 +134,11 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
       - TUNNEL_TRANSPORT_PROTOCOL=${TUNNEL_TRANSPORT_PROTOCOL}
     restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     network_mode: service:panel
 
 volumes:
