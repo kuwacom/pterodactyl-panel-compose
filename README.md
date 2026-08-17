@@ -4,6 +4,7 @@ Pterodactyl を Docker Compose + CFTunnelで簡単に構築
 
 このリポジトリは、Pterodactyl panel を Docker Compose で簡単にセットアップするためのものです
 
+> [!NOTE]
 > Pterodactyl wingsはこちら -> [kuwacom/pterodactyl-wings-compose](https://github.com/kuwacom/pterodactyl-wings-compose)
 
 ---
@@ -38,7 +39,8 @@ cp example.env .env
 
 セットアップ後、Cloudflare Tunnelのダッシュボード側で、`http://localhost:80`へ公開設定をしておきましょう
 
-CFTunnelのコンテナネットワークは、Pterodactyl-panel 内部になるようにしています(Proxy(CFTunnel)経由で接続元IPを正確に取得するために、trustedIPにlocalアドレスを設定しているため)
+> [!NOTE]
+> CFTunnelのコンテナネットワークは、Pterodactyl-panel 内部になるようにしています(Proxy(CFTunnel)経由で接続元IPを正確に取得するために、trustedIPにlocalアドレスを設定しているため)
 
 ### 4. Docker Composeで起動
 ```bash
@@ -65,8 +67,8 @@ bash ./make-admin-user.sh
 
 | サービス     | URL                  |
 |-------------|----------------------|
-| **Panel**   | `http://localhost:8080` |
-| **phpMyAdmin** | `http://localhost:8081` |
+| **Panel**   | `http://127.0.0.1:8080` |
+| **phpMyAdmin** | `http://127.0.0.1:8081` |
 
 ### データベースのバックアップと復元
 
