@@ -4,7 +4,7 @@ Pterodactyl を Docker Compose + CFTunnelで簡単に構築
 
 このリポジトリは、Pterodactyl panel を Docker Compose で簡単にセットアップするためのものです
 
-> Pterodactyl wingsはこちら -> [kuwacom/Pterodactyl-wings-docker-compose](https://github.com/kuwacom/Pterodactyl-wings-docker-compose)
+> Pterodactyl wingsはこちら -> [kuwacom/pterodactyl-wings-compose](https://github.com/kuwacom/pterodactyl-wings-compose)
 
 ---
 
@@ -12,8 +12,8 @@ Pterodactyl を Docker Compose + CFTunnelで簡単に構築
 
 ### 1. リポジトリをクローン
 ```bash
-git clone https://github.com/kuwacom/Pterodactyl-panel-docker-compose.git
-cd Pterodactyl-panel-docker-compose
+git clone https://github.com/kuwacom/pterodactyl-panel-compose.git
+cd pterodactyl-panel-compose
 ```
 
 ### 2. `.env` ファイルを作成
