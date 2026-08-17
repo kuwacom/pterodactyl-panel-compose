@@ -14,13 +14,13 @@ services:
       MYSQL_DATABASE: "${DB_DATABASE}"
       MYSQL_USER: "${DB_USER}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
-    # MySQL 8.4 では healthcheck.sh が同梱されている。起動完了を待つことで panel の初回接続レースを防ぐ
+    # MySQL 8.4 公式イメージには healthcheck.sh が存在しない（MariaDB固有）。mysqladmin ping で生存確認する
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 30s
+      start_period: 60s
     volumes:
       - ./mysql:/var/lib/mysql
 
