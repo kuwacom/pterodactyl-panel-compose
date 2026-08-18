@@ -1,0 +1,75 @@
+import React, { useEffect, useState } from 'react';
+import { ServerContext } from '@/state/server';
+import TitledGreyBox from '@/components/elements/TitledGreyBox';
+import reinstallServer from '@/api/server/reinstallServer';
+import { Actions, useStoreActions } from 'easy-peasy';
+import { ApplicationStore } from '@/state';
+import { httpErrorToHuman } from '@/api/http';
+import tw from 'twin.macro';
+import { Button } from '@/components/elements/button/index';
+import { Dialog } from '@/components/elements/dialog';
+
+export default () => {
+    const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
+    const skipScripts = ServerContext.useStoreState((state) => state.server.data!.skipScripts);
+    const [modalVisible, setModalVisible] = useState(false);
+    const { addFlash, clearFlashes } = useStoreActions((actions: Actions<ApplicationStore>) => actions.flashes);
+
+    const reinstall = () => {
+        clearFlashes('settings');
+        reinstallServer(uuid)
+            .then(() => {
+                addFlash({
+                    key: 'settings',
+                    type: 'success',
+                    message: 'サーバーの再インストール処理を開始しました。',
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+
+                addFlash({ key: 'settings', type: 'error', message: httpErrorToHuman(error) });
+            })
+            .then(() => setModalVisible(false));
+    };
+
+    useEffect(() => {
+        clearFlashes();
+    }, []);
+
+    if (skipScripts) {
+        return (
+            <TitledGreyBox title={'サーバーを再インストール'}>
+                <p css={tw`text-sm`}>
+                    このサーバーはEggのインストールスクリプトをスキップするように設定されているため、再インストールが無効になっています。
+                    再インストールしたい場合は、サーバー管理者に連絡してください。
+                </p>
+            </TitledGreyBox>
+        );
+    }
+
+    return (
+        <TitledGreyBox title={'サーバーを再インストール'} css={tw`relative`}>
+            <Dialog.Confirm
+                open={modalVisible}
+                title={'サーバー再インストールの確認'}
+                confirm={'はい、再インストールします'}
+                onClose={() => setModalVisible(false)}
+                onConfirmed={reinstall}
+            >
+                サーバーは停止され、この処理中に一部のファイルが削除または変更される可能性があります。続行しますか？
+            </Dialog.Confirm>
+            <p css={tw`text-sm`}>
+                サーバーを再インストールすると、サーバーを停止した後、初期セットアップ時に実行されたインストールスクリプトを再実行します。&nbsp;
+                <strong css={tw`font-medium`}>
+                    この処理中に一部のファイルが削除または変更される可能性があります。続行する前にデータをバックアップしてください。
+                </strong>
+            </p>
+            <div css={tw`mt-6 text-right`}>
+                <Button.Danger variant={Button.Variants.Secondary} onClick={() => setModalVisible(true)}>
+                    サーバーを再インストール
+                </Button.Danger>
+            </div>
+        </TitledGreyBox>
+    );
+};
