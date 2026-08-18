@@ -132,14 +132,13 @@ const FileDropdownMenu = ({ file }: { file: FileObject }) => {
             <Dialog.Confirm
                 open={showConfirmation}
                 onClose={() => setShowConfirmation(false)}
-                title={`Delete ${file.isFile ? 'File' : 'Directory'}`}
                 title={`${file.isFile ? 'ファイル' : 'ディレクトリ'}を削除`}
                 confirm={'削除'}
-               onConfirmed={doDeletion}
-           >
+                onConfirmed={doDeletion}
+            >
                 削除後、&nbsp;
                 <span className={'font-semibold text-gray-50'}>{file.name}</span> の内容を復元することはできません。
-           </Dialog.Confirm>
+            </Dialog.Confirm>
             <DropdownMenu
                 ref={onClickRef}
                 renderToggle={(onClick) => (
@@ -171,25 +170,25 @@ const FileDropdownMenu = ({ file }: { file: FileObject }) => {
                     <Row onClick={() => setModal('rename')} icon={faPencilAlt} title={'名前変更'} />
                     <Row onClick={() => setModal('move')} icon={faLevelUpAlt} title={'移動'} />
                     <Row onClick={() => setModal('chmod')} icon={faFileCode} title={'権限'} />
-               </Can>
-               {file.isFile && (
-                   <Can action={'file.create'}>
+                </Can>
+                {file.isFile && (
+                    <Can action={'file.create'}>
                         <Row onClick={doCopy} icon={faCopy} title={'コピー'} />
-                   </Can>
-               )}
-               {file.isArchiveType() ? (
-                   <Can action={'file.create'}>
+                    </Can>
+                )}
+                {file.isArchiveType() ? (
+                    <Can action={'file.create'}>
                         <Row onClick={doUnarchive} icon={faBoxOpen} title={'解凍'} />
-                   </Can>
-               ) : (
-                   <Can action={'file.archive'}>
+                    </Can>
+                ) : (
+                    <Can action={'file.archive'}>
                         <Row onClick={doArchive} icon={faFileArchive} title={'圧縮'} />
-                   </Can>
-               )}
+                    </Can>
+                )}
                 {file.isFile && <Row onClick={doDownload} icon={faFileDownload} title={'ダウンロード'} />}
-               <Can action={'file.delete'}>
+                <Can action={'file.delete'}>
                     <Row onClick={() => setShowConfirmation(true)} icon={faTrashAlt} title={'削除'} $danger />
-               </Can>
+                </Can>
             </DropdownMenu>
         </>
     );

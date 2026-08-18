@@ -42,13 +42,12 @@ export default ({ className }: PowerButtonProps) => {
                 open={open}
                 hideCloseIcon
                 onClose={() => setOpen(false)}
-                title={'Forcibly Stop Process'}
                 title={'プロセスを強制終了'}
                 confirm={'続行'}
-               onConfirmed={onButtonClick.bind(this, 'kill-confirmed')}
-           >
+                onConfirmed={onButtonClick.bind(this, 'kill-confirmed')}
+            >
                 サーバーを強制終了するとデータが破損する可能性があります。
-           </Dialog.Confirm>
+            </Dialog.Confirm>
             <Can action={'control.start'}>
                 <Button
                     className={'flex-1'}
@@ -56,12 +55,12 @@ export default ({ className }: PowerButtonProps) => {
                     onClick={onButtonClick.bind(this, 'start')}
                 >
                     起動
-               </Button>
+                </Button>
             </Can>
             <Can action={'control.restart'}>
                 <Button.Text className={'flex-1'} disabled={!status} onClick={onButtonClick.bind(this, 'restart')}>
                     再起動
-               </Button.Text>
+                </Button.Text>
             </Can>
             <Can action={'control.stop'}>
                 <Button.Danger
@@ -70,7 +69,7 @@ export default ({ className }: PowerButtonProps) => {
                     onClick={onButtonClick.bind(this, killable ? 'kill' : 'stop')}
                 >
                     {killable ? '強制終了' : '停止'}
-               </Button.Danger>
+                </Button.Danger>
             </Can>
         </div>
     );

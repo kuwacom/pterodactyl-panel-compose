@@ -39,13 +39,12 @@ const DeleteAllocationButton = ({ allocation }: Props) => {
             <Dialog.Confirm
                 open={confirm}
                 onClose={() => setConfirm(false)}
-                title={'Remove Allocation'}
                 title={'割り当てを削除'}
                 confirm={'削除'}
-               onConfirmed={deleteAllocation}
-           >
+                onConfirmed={deleteAllocation}
+            >
                 この割り当てはサーバーから直ちに削除されます。
-           </Dialog.Confirm>
+            </Dialog.Confirm>
             <Button.Danger
                 variant={Button.Variants.Secondary}
                 size={Button.Sizes.Small}

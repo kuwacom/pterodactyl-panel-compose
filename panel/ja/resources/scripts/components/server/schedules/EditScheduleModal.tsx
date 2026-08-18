@@ -90,31 +90,31 @@ const EditScheduleModal = ({ schedule }: Props) => {
         >
             {({ isSubmitting }) => (
                 <Form>
-                    <h3 css={tw`text-2xl mb-6`}>{schedule ? 'Edit schedule' : 'Create new schedule'}</h3>
+                    <h3 css={tw`text-2xl mb-6`}>{schedule ? 'スケジュールを編集' : '新規スケジュールを作成'}</h3>
                     <FlashMessageRender byKey={'schedule:edit'} css={tw`mb-6`} />
                     <Field
-                       name={'name'}
+                        name={'name'}
                         label={'スケジュール名'}
                         description={'このスケジュールの分かりやすい識別名。'}
-                   />
-                   <div css={tw`grid grid-cols-2 sm:grid-cols-5 gap-4 mt-6`}>
+                    />
+                    <div css={tw`grid grid-cols-2 sm:grid-cols-5 gap-4 mt-6`}>
                         <Field name={'minute'} label={'分'} />
                         <Field name={'hour'} label={'時'} />
                         <Field name={'dayOfMonth'} label={'日(月)'} />
                         <Field name={'month'} label={'月'} />
                         <Field name={'dayOfWeek'} label={'日(週)'} />
-                   </div>
-                   <p css={tw`text-neutral-400 text-xs mt-2`}>
+                    </div>
+                    <p css={tw`text-neutral-400 text-xs mt-2`}>
                         スケジュールシステムはCronjob構文をサポートしています。上記のフィールドを使用して、タスクの実行開始時刻を指定してください。
-                   </p>
+                    </p>
                     <div css={tw`mt-6 bg-neutral-700 border border-neutral-800 shadow-inner p-4 rounded`}>
                         <Switch
-                           name={'show_cheatsheet'}
+                            name={'show_cheatsheet'}
                             description={'Cronのチートシートを表示します。'}
                             label={'チートシートを表示'}
-                           defaultChecked={showCheatsheet}
-                           onChange={() => setShowCheetsheet((s) => !s)}
-                       />
+                            defaultChecked={showCheatsheet}
+                            onChange={() => setShowCheetsheet((s) => !s)}
+                        />
                         {showCheatsheet && (
                             <div css={tw`block md:flex w-full`}>
                                 <ScheduleCheatsheetCards />
@@ -123,22 +123,22 @@ const EditScheduleModal = ({ schedule }: Props) => {
                     </div>
                     <div css={tw`mt-6 bg-neutral-700 border border-neutral-800 shadow-inner p-4 rounded`}>
                         <FormikSwitch
-                           name={'onlyWhenOnline'}
+                            name={'onlyWhenOnline'}
                             description={'サーバーが実行中の状態の時のみスケジュールを実行します。'}
                             label={'サーバーがオンラインの時のみ実行'}
-                       />
+                        />
                     </div>
                     <div css={tw`mt-6 bg-neutral-700 border border-neutral-800 shadow-inner p-4 rounded`}>
                         <FormikSwitch
-                           name={'enabled'}
+                            name={'enabled'}
                             description={'有効な場合、このスケジュールは自動的に実行されます。'}
                             label={'スケジュールを有効化'}
-                       />
+                        />
                     </div>
                     <div css={tw`mt-6 text-right`}>
                         <Button className={'w-full sm:w-auto'} type={'submit'} disabled={isSubmitting}>
                             {schedule ? '変更を保存' : 'スケジュールを作成'}
-                       </Button>
+                        </Button>
                     </div>
                 </Form>
             )}
@@ -147,4 +147,3 @@ const EditScheduleModal = ({ schedule }: Props) => {
 };
 
 export default asModal<Props>()(EditScheduleModal);
-                    <h3 css={tw`text-2xl mb-6`}>{schedule ? 'スケジュールを編集' : '新規スケジュールを作成'}</h3>
