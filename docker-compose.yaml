@@ -39,7 +39,10 @@ services:
       - ./redis:/data
 
   panel:
-    image: ghcr.io/pterodactyl/panel:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: ghcr.io/kuwacom/pterodactyl-panel-ja:latest
     container_name: pterodactyl-panel
     restart: unless-stopped
     logging:
@@ -78,7 +81,7 @@ services:
   queue:
     # Pterodactyl Queue Worker
     # `* * * * * php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1` こいつにあたる
-    image: ghcr.io/pterodactyl/panel:latest
+    image: ghcr.io/kuwacom/pterodactyl-panel-ja:latest
     container_name: pterodactyl-queue
     restart: unless-stopped
     logging:

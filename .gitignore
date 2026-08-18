@@ -34,3 +34,7 @@ node_modules/
 tmp/
 temp/
 logs/
+# Ignore node artifacts (if translation work generates any)
+panel/ja/**/node_modules/
+panel/ja/**/.yarn/
+docker/.cache/

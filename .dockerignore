@@ -1,0 +1,7 @@
+# 全て除外し、翻訳ファイルとDockerfileのみをビルドコンテキストに含める
+*
+!panel/
+!panel/ja/
+!panel/ja/**
+!docker/
+!docker/**
