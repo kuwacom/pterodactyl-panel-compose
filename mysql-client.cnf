@@ -1,0 +1,8 @@
+# Panel コンテナ内の mysql(mariadb) クライアントの証明書検証を無効化する
+# SSL暗号化は有効なまま、自己署名証明書の検証のみスキップする
+# MariaDB 11.4+ は証明書検証がデフォルトで有効化されており、MySQL 8.4 の自己署名証明書でエラーになるため
+[client]
+# MariaDB 11.4+ の場合
+disable-ssl-verify-server-cert
+# MariaDB 10.x の場合は代わりに以下を使用
+# skip-ssl-verify-server-cert

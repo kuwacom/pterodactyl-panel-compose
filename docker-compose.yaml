@@ -14,6 +14,9 @@ services:
       MYSQL_DATABASE: "${DB_DATABASE}"
       MYSQL_USER: "${DB_USER}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
+    # MySQL 8.4 のデフォルト認証プラグイン caching_sha2_password は MariaDB クライアントが未サポートのため
+    # mysql_native_password を使用する（mysql CLI でスキーマダンプを読み込む際に必要）
+    command: --mysql-native-password=ON --authentication-policy=mysql_native_password
     # MySQL 8.4 公式イメージには healthcheck.sh が存在しない（MariaDB固有）。mysqladmin ping で生存確認する
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
@@ -61,6 +64,7 @@ services:
         condition: service_started
     volumes:
       - pterodactyl-app:/app
+      - ./mysql-client.cnf:/root/.my.cnf:ro
     ports:
       - 127.0.0.1:8080:80
 
