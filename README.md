@@ -235,6 +235,10 @@ bash ./scripts/create-admin-user.sh
 |----------|----------|------|
 | **panel** | `ghcr.io/pterodactyl/panel:latest` | Pterodactyl Panel 本体 |
 | **queue** | `ghcr.io/pterodactyl/panel:latest` | Queue Worker（バックグラウンドジョブ処理） |
+
+> [!NOTE]
+> Panel / Queue は日本語化カスタムイメージ `ghcr.io/kuwacom/pterodactyl-panel-ja:latest` を使用します
+> 詳細は [日本語化について](#-日本語化について) を参照してください
 | **mysql** | `mysql:8.4` | データベース（永続化） |
 | **redis** | `redis:alpine` | キャッシュ・キュー・セッション |
 | **phpmyadmin** | `phpmyadmin` | DB 管理ツール（ローカルのみ） |
@@ -246,3 +250,95 @@ bash ./scripts/create-admin-user.sh
 
 マイグレーションが未実行の場合、管理者ユーザー作成に失敗します
 先に `setup.sh` を実行するか、`scripts/migrate.sh` を単独で実行してください
+
+## 🌸 日本語化について
+
+本リポジトリの Panel / Queue イメージは、公式 `ghcr.io/pterodactyl/panel:v1.15.1` をベースに**完全日本語化**したカスタムイメージ `ghcr.io/kuwacom/pterodactyl-panel-ja:latest` を使用しています
+
+### カスタマイズ内容
+
+- バックエンド言語ファイル（`resources/lang/en/*.php`）の日本語化
+- フロントエンド React/TypeScript（`resources/scripts/**/*.tsx`）のハードコード文字列の日本語化
+- Blade ビュー（`resources/views/**/*.blade.php`）のハードコード文字列の日本語化
+
+### イメージのビルド
+
+`docker/Dockerfile` でマルチステージビルドを行います:
+
+1. `node:22-alpine` で upstream ソース + 翻訳ファイルをビルド
+2. 公式イメージ `ghcr.io/pterodactyl/panel:v1.15.1` にビルド済みアセットを配置
+
+```bash
+# ローカルビルド
+docker compose build panel
+
+# 起動
+docker compose up -d
+```
+
+## 🔨 翻訳の開発方法
+
+翻訳ファイルは `panel/ja/resources/` 配下に差分管理で配置しています（翻訳したファイルのみ）
+
+### 開発環境のセットアップ
+
+補完・型チェック・リントを有効にするため、upstream のソースツリーをローカルに構築します:
+
+```bash
+# Windows (PowerShell)
+pwsh scripts/dev-setup.ps1
+
+# WSL / Linux
+bash scripts/dev-setup.sh
+```
+
+`panel/ja/.dev/` に upstream v1.15.1 のソース一式がクローンされ、翻訳ファイルが上書きされます
+
+### 翻訳ファイルの編集
+
+VS Code で `panel/ja/.dev/` を開きます:
+
+```bash
+code panel/ja/.dev
+```
+
+このディレクトリは完全な Node.js プロジェクトとして動作するため、IntelliSense・型チェック・リントが全て利用できます:
+
+```bash
+# 型チェック
+npx tsc --noEmit
+
+# リント
+npx eslint resources/scripts/**/*.{ts,tsx}
+```
+
+### Git管理側への同期
+
+`.dev/resources/` で編集したファイルを `panel/ja/resources/` に同期します:
+
+```bash
+# Windows (PowerShell)
+pwsh scripts/dev-sync.ps1
+
+# WSL / Linux
+bash scripts/dev-sync.sh
+```
+
+変更があったファイルのみコピーされ、差分が表示されます
+`git diff` で確認後、コミットしてください
+
+### 開発フロー
+
+```
+1. pwsh scripts/dev-setup.ps1    # 初回のみ
+2. VS Code で panel/ja/.dev/ を開く
+3. .dev/resources/ の翻訳ファイルを編集
+4. pwsh scripts/dev-sync.ps1     # Git管理側に同期
+5. git diff で確認 -> コミット
+6. docker compose build panel    # ビルド確認
+```
+
+> [!NOTE]
+> - npm を使用します（upstream は yarn ですが開発用途なら npm で問題ありません）
+> - 本番ビルドは Docker ビルドで行うため、ローカルでの webpack 実行は不要です
+> - `panel/ja/.dev/` は `.gitignore` で除外されています
