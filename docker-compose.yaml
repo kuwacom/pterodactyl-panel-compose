@@ -40,8 +40,8 @@ services:
 
   panel:
     build:
-      context: .
-      dockerfile: docker/Dockerfile
+     context: .
+     dockerfile: docker/Dockerfile
     image: ghcr.io/kuwacom/pterodactyl-panel-ja:latest
     container_name: pterodactyl-panel
     restart: unless-stopped
