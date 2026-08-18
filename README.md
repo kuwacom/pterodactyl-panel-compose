@@ -215,8 +215,11 @@ bash ./scripts/create-admin-user.sh
 ├── db-dump.sh
 ├── db-restore.sh
 ├── nginx/
-├── mysql/
-└── redis/
+├── mysql/                  # MySQL データ（永続化）
+├── redis/                  # Redis データ（永続化）
+└── pterodactyl/            # Panel 永続データ（公式推奨パス）
+    ├── var/                # サーバーアップロードファイル等
+    └── logs/               # Panel ログ
 ```
 
 ## 🌐 Nginx について

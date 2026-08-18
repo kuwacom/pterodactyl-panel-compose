@@ -5,6 +5,9 @@ dump.sql
 # Ignore redis dump files
 redis/
 
+# Ignore pterodactyl panel persistent data
+pterodactyl/
+
 # Ignore nginx logs and temp files (if any)
 nginx/logs/
 nginx/temp/

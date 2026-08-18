@@ -63,7 +63,14 @@ services:
       redis:
         condition: service_started
     volumes:
-      - pterodactyl-app:/app
+      # Panel で永続化すべきデータ（公式推奨パス）
+      - ./pterodactyl/var:/app/var
+      - ./pterodactyl/logs:/app/storage/logs
+      # nginx 設定をホスト側で管理する場合（デフォルトで不要）
+      # - ./pterodactyl/nginx:/etc/nginx/http.d
+      # Let's Encrypt 証明書（Cloudflare Tunnel 使用時は不要）
+      # - ./pterodactyl/certs:/etc/letsencrypt
+      # MySQL CLI 設定
       - ./mysql-client.cnf:/root/.my.cnf:ro
     ports:
       - 127.0.0.1:8080:80
@@ -91,6 +98,10 @@ services:
     depends_on:
       panel:
         condition: service_started
+    volumes:
+      # panel と同じ永続化パスを共有（キューが扱うファイル・ログ整合性のため）
+      - ./pterodactyl/var:/app/var
+      - ./pterodactyl/logs:/app/storage/logs
     command: ["php", "artisan", "queue:work", "--sleep=3", "--tries=3"]
 
   # nginx:
@@ -144,6 +155,3 @@ services:
         max-size: "10m"
         max-file: "3"
     network_mode: service:panel
-
-volumes:
-  pterodactyl-app:
