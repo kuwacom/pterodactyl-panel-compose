@@ -69,7 +69,7 @@ export default () => {
                         }}
                     >
                         <FlashMessageRender byKey={'database:create'} css={tw`mb-6`} />
-                        <h2 css={tw`text-2xl mb-6`}>Create new database</h2>
+                        <h2 css={tw`text-2xl mb-6`}>新規データベースを作成</h2>
                         <Form css={tw`m-0`}>
                             <Field
                                type={'string'}
@@ -106,9 +106,7 @@ export default () => {
                     </Modal>
                 )}
             </Formik>
-            <Button onClick={() => setVisible(true)}>New Database</Button>
+            <Button onClick={() => setVisible(true)}>新規データベース</Button>
         </>
     );
 };
-                        <h2 css={tw`text-2xl mb-6`}>新規データベースを作成</h2>
-            <Button onClick={() => setVisible(true)}>新規データベース</Button>

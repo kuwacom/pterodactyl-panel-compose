@@ -21,7 +21,7 @@ interface Values {
 }
 
 const schema = object().shape({
-    directoryName: string().required('A valid directory name must be provided.'),
+    directoryName: string().required('有効なディレクトリ名を入力してください。'),
 });
 
 const displayNameForDirectory = (name: string): string =>
@@ -80,9 +80,9 @@ const NewDirectoryDialog = asDialog({
                 <>
                     <FlashMessageRender key={'files:directory-modal'} />
                     <Form css={tw`m-0`}>
-                        <Field autoFocus id={'directoryName'} name={'directoryName'} label={'Name'} />
+                        <Field autoFocus id={'directoryName'} name={'directoryName'} label={'名前'} />
                         <p css={tw`mt-2 text-sm md:text-base break-all`}>
-                            <span css={tw`text-neutral-200`}>This directory will be created as&nbsp;</span>
+                            <span css={tw`text-neutral-200`}>このディレクトリは次の場所に作成されます&nbsp;</span>
                             <Code>
                                 /home/container/
                                 <span css={tw`text-cyan-200`}>
@@ -117,6 +117,3 @@ export default ({ className }: WithClassname) => {
         </>
     );
 };
-    directoryName: string().required('有効なディレクトリ名を入力してください。'),
-                        <Field autoFocus id={'directoryName'} name={'directoryName'} label={'名前'} />
-                            <span css={tw`text-neutral-200`}>このディレクトリは次の場所に作成されます&nbsp;</span>

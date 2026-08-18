@@ -60,7 +60,7 @@ export default () => {
     }
 
     return (
-        <ServerContentBlock title={'File Manager'} showFlashKey={'files'}>
+        <ServerContentBlock title={'ファイルマネージャー'} showFlashKey={'files'}>
             <ErrorBoundary>
                 <div className={'flex flex-wrap-reverse md:flex-nowrap mb-4'}>
                     <FileManagerBreadcrumbs
@@ -79,7 +79,7 @@ export default () => {
                             <NewDirectoryButton />
                             <UploadButton />
                             <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                                <Button>New File</Button>
+                                <Button>新規ファイル</Button>
                             </NavLink>
                         </div>
                     </Can>
@@ -90,7 +90,7 @@ export default () => {
             ) : (
                 <>
                     {!files.length ? (
-                        <p css={tw`text-sm text-neutral-400 text-center`}>This directory seems to be empty.</p>
+                        <p css={tw`text-sm text-neutral-400 text-center`}>このディレクトリは空のようです。</p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>
@@ -98,7 +98,7 @@ export default () => {
                                     <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
                                         <p css={tw`text-yellow-900 text-sm text-center`}>
                                             このディレクトリは大きすぎてブラウザに表示できないため、最初の250ファイルのみ表示しています。
-                                       </p>
+                                        </p>
                                     </div>
                                 )}
                                 {sortFiles(files.slice(0, 250)).map((file) => (
@@ -113,6 +113,3 @@ export default () => {
         </ServerContentBlock>
     );
 };
-        <ServerContentBlock title={'ファイルマネージャー'} showFlashKey={'files'}>
-                                <Button>新規ファイル</Button>
-                        <p css={tw`text-sm text-neutral-400 text-center`}>このディレクトリは空のようです。</p>

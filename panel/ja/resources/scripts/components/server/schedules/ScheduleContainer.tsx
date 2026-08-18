@@ -38,7 +38,7 @@ export default () => {
     }, []);
 
     return (
-        <ServerContentBlock title={'Schedules'}>
+        <ServerContentBlock title={'スケジュール'}>
             <FlashMessageRender byKey={'schedules'} css={tw`mb-4`} />
             {!schedules.length && loading ? (
                 <Spinner size={'large'} centered />
@@ -47,7 +47,7 @@ export default () => {
                     {schedules.length === 0 ? (
                         <p css={tw`text-sm text-center text-neutral-300`}>
                             このサーバーにはスケジュールが設定されていません。
-                       </p>
+                        </p>
                     ) : (
                         schedules.map((schedule) => (
                             <GreyRowBox
@@ -69,7 +69,7 @@ export default () => {
                             <EditScheduleModal visible={visible} onModalDismissed={() => setVisible(false)} />
                             <Button type={'button'} onClick={() => setVisible(true)}>
                                 スケジュールを作成
-                           </Button>
+                            </Button>
                         </div>
                     </Can>
                 </>
@@ -77,4 +77,3 @@ export default () => {
         </ServerContentBlock>
     );
 };
-        <ServerContentBlock title={'スケジュール'}>

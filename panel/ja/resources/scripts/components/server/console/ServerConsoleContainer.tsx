@@ -22,15 +22,15 @@ const ServerConsoleContainer = () => {
     const isNodeUnderMaintenance = ServerContext.useStoreState((state) => state.server.data!.isNodeUnderMaintenance);
 
     return (
-        <ServerContentBlock title={'Console'}>
+        <ServerContentBlock title={'コンソール'}>
             {(isNodeUnderMaintenance || isInstalling || isTransferring) && (
                 <Alert type={'warning'} className={'mb-4'}>
-                   {isNodeUnderMaintenance
+                    {isNodeUnderMaintenance
                         ? 'このサーバーのノードは現在メンテナンス中で、すべての操作が利用できません。'
-                       : isInstalling
+                        : isInstalling
                         ? 'このサーバーは現在インストール処理を実行中で、ほとんどの操作が利用できません。'
                         : 'このサーバーは現在別のノードに転送中で、すべての操作が利用できません。'}
-               </Alert>
+                </Alert>
             )}
             <div className={'grid grid-cols-4 gap-4 mb-4'}>
                 <div className={'hidden sm:block sm:col-span-2 lg:col-span-3 pr-4'}>
@@ -64,4 +64,3 @@ const ServerConsoleContainer = () => {
 };
 
 export default memo(ServerConsoleContainer, isEqual);
-        <ServerContentBlock title={'コンソール'}>

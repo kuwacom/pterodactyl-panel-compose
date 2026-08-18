@@ -72,7 +72,7 @@ export default ({ database, className }: Props) => {
                         }}
                     >
                         <FlashMessageRender byKey={'database:delete'} css={tw`mb-6`} />
-                        <h2 css={tw`text-2xl mb-6`}>Confirm database deletion</h2>
+                        <h2 css={tw`text-2xl mb-6`}>データベース削除の確認</h2>
                         <p css={tw`text-sm`}>
                             データベースの削除は取り消せない操作です。<strong>{database.name}</strong>データベースと
                             関連するすべてのデータが完全に削除されます。
@@ -99,7 +99,7 @@ export default ({ database, className }: Props) => {
             </Formik>
             <Modal visible={connectionVisible} onDismissed={() => setConnectionVisible(false)}>
                 <FlashMessageRender byKey={'database-connection-modal'} css={tw`mb-6`} />
-                <h3 css={tw`mb-6 text-2xl`}>Database connection details</h3>
+                <h3 css={tw`mb-6 text-2xl`}>データベース接続情報</h3>
                 <div>
                     <Label>エンドポイント</Label>
                    <CopyOnClick text={database.connectionString}>
@@ -152,17 +152,17 @@ export default ({ database, className }: Props) => {
                     <CopyOnClick text={database.connectionString}>
                         <p css={tw`text-sm`}>{database.connectionString}</p>
                     </CopyOnClick>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Endpoint</p>
+                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>エンドポイント</p>
                 </div>
                 <div css={tw`ml-8 text-center hidden md:block`}>
                     <p css={tw`text-sm`}>{database.allowConnectionsFrom}</p>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Connections from</p>
+                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>接続元</p>
                 </div>
                 <div css={tw`ml-8 text-center hidden md:block`}>
                     <CopyOnClick text={database.username}>
                         <p css={tw`text-sm`}>{database.username}</p>
                     </CopyOnClick>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Username</p>
+                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>ユーザー名</p>
                 </div>
                 <div css={tw`ml-8`}>
                     <Button isSecondary css={tw`mr-2`} onClick={() => setConnectionVisible(true)}>
@@ -178,8 +178,3 @@ export default ({ database, className }: Props) => {
         </>
     );
 };
-                        <h2 css={tw`text-2xl mb-6`}>データベース削除の確認</h2>
-                <h3 css={tw`mb-6 text-2xl`}>データベース接続情報</h3>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>エンドポイント</p>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>接続元</p>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>ユーザー名</p>

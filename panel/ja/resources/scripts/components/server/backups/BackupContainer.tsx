@@ -33,7 +33,7 @@ const BackupContainer = () => {
     }
 
     return (
-        <ServerContentBlock title={'Backups'}>
+        <ServerContentBlock title={'バックアップ'}>
             <FlashMessageRender byKey={'backups'} css={tw`mb-4`} />
             <Pagination data={backups} onPageSelect={setPage}>
                 {({ items }) =>
@@ -42,10 +42,10 @@ const BackupContainer = () => {
                         // create additional ones for the server.
                         !backupLimit ? null : (
                             <p css={tw`text-center text-sm text-neutral-300`}>
-                               {page > 1
+                                {page > 1
                                     ? '表示するバックアップがなくなりました。前のページに戻ってみてください。'
                                     : 'このサーバーには現在バックアップが保存されていません。'}
-                           </p>
+                            </p>
                         )
                     ) : (
                         items.map((backup, index) => (
@@ -57,14 +57,14 @@ const BackupContainer = () => {
             {backupLimit === 0 && (
                 <p css={tw`text-center text-sm text-neutral-300`}>
                     このサーバーではバックアップ上限が0に設定されているため、バックアップを作成できません。
-               </p>
+                </p>
             )}
             <Can action={'backup.create'}>
                 <div css={tw`mt-6 sm:flex items-center justify-end`}>
                     {backupLimit > 0 && backups.backupCount > 0 && (
                         <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
                             {backups.backupCount} / {backupLimit} 個のバックアップが作成されています。
-                       </p>
+                        </p>
                     )}
                     {backupLimit > 0 && backupLimit > backups.backupCount && (
                         <CreateBackupButton css={tw`w-full sm:w-auto`} />
@@ -83,4 +83,3 @@ export default () => {
         </ServerBackupContext.Provider>
     );
 };
-        <ServerContentBlock title={'バックアップ'}>

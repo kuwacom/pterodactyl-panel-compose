@@ -37,7 +37,7 @@ export default () => {
     }, []);
 
     return (
-        <ServerContentBlock title={'Databases'}>
+        <ServerContentBlock title={'データベース'}>
             <FlashMessageRender byKey={'databases'} css={tw`mb-4`} />
             {!databases.length && loading ? (
                 <Spinner size={'large'} centered />
@@ -54,18 +54,18 @@ export default () => {
                             ))
                         ) : (
                             <p css={tw`text-center text-sm text-neutral-300`}>
-                               {databaseLimit > 0
+                                {databaseLimit > 0
                                     ? 'データベースが存在しません。'
                                     : 'このサーバーではデータベースを作成できません。'}
-                           </p>
+                            </p>
                         )}
                         <Can action={'database.create'}>
                             <div css={tw`mt-6 flex items-center justify-end`}>
                                 {databaseLimit > 0 && databases.length > 0 && (
-                                   <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
+                                    <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
                                         {databases.length} / {databaseLimit} 個のデータベースがこのサーバーに割り当てられています。
-                                   </p>
-                               )}
+                                    </p>
+                                )}
                                 {databaseLimit > 0 && databaseLimit !== databases.length && (
                                     <CreateDatabaseButton css={tw`flex justify-end mt-6`} />
                                 )}
@@ -77,4 +77,3 @@ export default () => {
         </ServerContentBlock>
     );
 };
-        <ServerContentBlock title={'データベース'}>
